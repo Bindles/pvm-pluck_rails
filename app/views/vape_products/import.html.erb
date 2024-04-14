@@ -1,0 +1,27 @@
+<!-- import.html.erb -->
+<%= form_tag import_vape_products_path, multipart: true do %>
+  <p>
+    <%= file_field_tag :file %>
+  </p>
+  <p>
+    <label>
+      <%= check_box_tag 'import_option_skip', 1 %>
+      Skip Duplicate Entries
+    </label>
+  </p>
+  <p>
+    <label>
+      <%= check_box_tag 'import_option_update', 1 %>
+      Update Existing Entries
+    </label>
+  </p>
+  <p>
+    <label>
+      <%= check_box_tag 'import_option_error', 1 %>
+      Raise an Error for Duplicate Entries
+    </label>
+  </p>
+  <p>
+    <%= submit_tag "Import CSV" %>
+  </p>
+<% end %>

@@ -66,3 +66,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'htmx-rails'
+gem 'httparty'
+
+
+gem 'csv'
+gem 'svelte-rails'

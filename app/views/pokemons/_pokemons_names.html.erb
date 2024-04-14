@@ -1,0 +1,7 @@
+<!-- app/views/pokemon/_pokemon_names.html.erb -->
+<% if @pokemons_data %>
+  <% @pokemons_data['results'].each do |pokemons| %>
+    <p><%= pokemons['name'].capitalize %></p>
+  <% end %>
+<% end%>
+test

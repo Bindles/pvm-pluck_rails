@@ -1,0 +1,19 @@
+<!-- app/views/pokemon/index.html.erb -->
+<h1>Pokemon List</h1>
+
+<%= link_to 'Poke Scaffold', pokes_path %><br>
+<%= link_to 'Poke/New', new_poke_path %><br>
+<br>
+
+
+
+<a href="#" data-hx-get="<%= url_for(action: 'fetch_pokemon') %>" data-hx-target="#pokemon-list">Load Pokemon</a>
+
+<button data-hx-post="<%= url_for(action: 'clear_pokemon') %>" data-hx-target="#pokemon-list">Clear Pokemon</button>
+
+<div id="pokemon-list">
+  <%#= render partial: 'pokemon_names' %>
+  <div class="startingtest">
+    starting text
+  </div>
+</div>

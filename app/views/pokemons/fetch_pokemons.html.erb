@@ -1,0 +1,10 @@
+<!-- app/views/pokemon/_pokemon_names.html.erb -->
+a
+<% if @pokemons_data %>
+b
+  <ul>
+    <% @pokemons_data['results'].each do |pokemons| %>
+      <li><%= pokemons['name'] %></li>
+    <% end %>
+  </ul>
+<% end %>

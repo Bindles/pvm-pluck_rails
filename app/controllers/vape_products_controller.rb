@@ -1,3 +1,4 @@
+#vape_products.controller.rb
 class VapeProductsController < ApplicationController
   before_action :set_vape_product, only: %i[ show edit update destroy ]
 
@@ -6,13 +7,39 @@ class VapeProductsController < ApplicationController
     @vape_products = VapeProduct.all
     @products_by_category = VapeProduct.order(:category)
     @categories = VapeProduct.pluck(:category).uniq
+    session[:valid_categories] = @categories
   end
 
   def show_category
     @category = params[:category]
-    @products = VapeProduct.where(category: @category)
+    if session[:valid_categories].include?(@category)
+      @products = VapeProduct.where(category: @category)
+    else
+      redirect_to vape_products_path
+    end
   end
-  
+
+  def show_categoryz
+    @category = params[:category]
+    @products = VapeProduct.where(category: @category)
+    if @products.empty?
+      redirect_to vape_products_path
+    end
+    
+  end
+
+  def layout
+    @vape_products = VapeProduct.all
+
+  end
+  def layout2
+    @vape_products = VapeProduct.all
+
+  end
+  def layout3
+    @vape_products = VapeProduct.all
+  end
+
   # GET /vape_products/1 or /vape_products/1.json
   def show
   end
@@ -61,6 +88,28 @@ class VapeProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to vape_products_url, notice: "Vape product was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+
+  def export
+    @vape_products = VapeProduct.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @vape_products.to_csv, filename: "vape_products-#{Date.today}.csv" }
+    end
+  end
+  
+  def import
+    import_option_skip = params[:import_option_skip] == '1'
+    import_option_update = params[:import_option_update] == '1'
+    import_option_error = params[:import_option_error] == '1'
+
+    begin
+      VapeProduct.import(params[:file], import_option_skip, import_option_update, import_option_error)
+      redirect_to vape_products_path, notice: "Vape Products imported successfully."
+    rescue StandardError => e
+      redirect_to vape_products_path, alert: "Error importing Vape Products: #{e.message}"
     end
   end
 

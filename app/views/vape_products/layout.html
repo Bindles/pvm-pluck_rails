@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Shirt Store</title>
+
+  <!-- Vuetify CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
+
+  <style>
+    /* Add custom styles here */
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-app-bar app color="primary">
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title>My T-Shirt Store</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn text>Home</v-btn>
+        <v-btn text>About</v-btn>
+        <v-btn text>Contact</v-btn>
+      </v-app-bar>
+
+      <v-navigation-drawer v-model="drawer" app>
+        <v-list>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-information</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>About</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-email</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Contact</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-content>
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="4" v-for="(shirt, index) in shirts" :key="index">
+              <v-card>
+                <v-img :src="shirt.image" height="300px"></v-img>
+                <v-card-title>{{ shirt.name }}</v-card-title>
+                <v-card-subtitle>{{ shirt.price }}</v-card-subtitle>
+                <v-card-actions>
+                  <v-btn color="primary">Add to Cart</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+
+  <!-- Vue.js and Vuetify CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data() {
+        return {
+          drawer: false,
+          shirts: [{
+              name: "Cool T-Shirt 1",
+              price: "$20",
+              image: "https://via.placeholder.com/300",
+            },
+            {
+              name: "Awesome T-Shirt 2",
+              price: "$25",
+              image: "https://via.placeholder.com/300",
+            },
+            {
+              name: "Fantastic T-Shirt 3",
+              price: "$22",
+              image: "https://via.placeholder.com/300",
+            },
+            {
+              name: "Amazing T-Shirt 4",
+              price: "$18",
+              image: "https://via.placeholder.com/300",
+            },
+          ],
+        };
+      },
+    });
+  </script>
+</body>
+
+</html>

@@ -94,6 +94,7 @@ GEM
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
+    csv (3.2.7)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -101,8 +102,13 @@ GEM
     drb (2.1.1)
       ruby2_keywords
     erubi (1.12.0)
+    execjs (2.9.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmx-rails (0.2.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -128,6 +134,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.20.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mutex_m (0.1.2)
     net-imap (0.4.2)
       date
@@ -212,6 +219,9 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.0.8)
+    svelte-rails (0.3.4)
+      execjs
+      railties (>= 5.2)
     thor (1.3.0)
     timeout (0.4.0)
     turbo-rails (1.5.0)
@@ -240,7 +250,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  csv
   debug
+  htmx-rails
+  httparty
   importmap-rails
   jbuilder
   pg (~> 1.1)
@@ -250,6 +263,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
+  svelte-rails
   turbo-rails
   tzinfo-data
   web-console

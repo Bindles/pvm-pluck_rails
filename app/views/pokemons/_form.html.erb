@@ -1,0 +1,106 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Svelte Fetch Example</title>
+
+</head>
+<body>
+
+
+</body>
+</html>
+
+
+<%= form_with(model: pokemon) do |form| %>
+  <% if pokemon.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:</h2>
+
+      <ul>
+        <% pokemon.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :url, style: "display: block" %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+  <%= button_tag 'Fetch Pokemon URL', id: 'fetchButton', type: 'button' %>
+  
+
+<% end %>
+
+  <button id="fetchButtonj">Fetch Pokemon URL</button>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Wait for the DOM content to be fully loaded
+
+  // Fetch data from PokeAPI
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=1')
+    .then(response => response.json())
+    .then(data => {
+      // Extract the Pokemon name from the fetched data
+      const pokemonName = data.results[0].name;
+
+      // Update the NAME form field on your POKEMON NEW page
+      const pokemonNameInput = document.getElementById('pokemon_name');
+      if (pokemonNameInput) {
+        pokemonNameInput.value = pokemonName;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching Pokemon data:', error);
+    });
+});
+document.addEventListener("DOMContentLoaded", function() {
+  // Wait for the DOM content to be fully loaded
+
+  // Function to fetch data from PokeAPI for URL
+  function fetchPokemonUrl() {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=1')
+      .then(response => response.json())
+      .then(data => {
+        // Extract the Pokemon URL from the fetched data
+        const pokemonUrl = data.results[0].url;
+
+        // Update the URL form field on your POKEMON NEW page
+        const pokemonUrlInput = document.getElementById('pokemon_url');
+        if (pokemonUrlInput) {
+          pokemonUrlInput.value = pokemonUrl;
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching Pokemon URL:', error);
+      });
+  }
+
+  // Attach fetch function to button click
+  const fetchButton = document.getElementById('fetchButton');
+  const fetchButtonj = document.getElementById('fetchButtonj');
+  if (fetchButton) {
+    fetchButton.addEventListener('click', fetchPokemonUrl);
+  }
+  if (fetchButtonj) {
+    fetchButtonj.addEventListener('click', fetchPokemonUrl);
+  }
+});
+
+
+</script>

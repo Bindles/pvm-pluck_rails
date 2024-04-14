@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Other meta tags, title, and stylesheets -->
+
+  <!-- Vue.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <!-- Vuetify CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.7/dist/vuetify.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.7"></script>
+</head>
+<body>
+  <%= yield %>
+
+  <!-- Your application JavaScript -->
+</body>
+</html>
+
+
+<div id="app">
+  <vape-products :initial-products="<%= raw @vape_products.to_json %>"></vape-products>
+</div>
+
+<!-- Your application JavaScript -->
+<script>
+  Vue.component('vape-products', {
+    template: '#vape-products-template',
+    props: ['initialProducts'],
+    data() {
+      return {
+        products: this.initialProducts
+      };
+    }
+  });
+
+  new Vue({
+    el: '#app'
+  });
+</script>
+
+
+<!-- Vue component template -->
+<template id="vape-products-template">
+  <div>
+    <h1>Vape Products</h1>
+    <div v-for="product in products" :key="product.id">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <p>
+        <a :href="'/vape_products/' + product.id">Show this vape product</a>
+      </p>
+    </div>
+  </div>
+</template>
+

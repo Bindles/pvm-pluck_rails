@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<%= link_to 'Products', vape_products_path %>
+
+<h1>Pokemons</h1>
+
+
+<a href="#" data-hx-get="<%= url_for(action: 'fetch_pokemons') %>" data-hx-target="#pokemon-list">Load Pokemon</a>
+
+<button data-hx-post="<%= url_for(action: 'clear_pokemons') %>" data-hx-target="#pokemon-list">Clear Pokemon</button>
+
+<div id="pokemon-list">
+  <%#= render partial: 'pokemon_names' %>
+  <div class="startingtest">
+    starting text
+  </div>
+</div>
+
+<div id="pokemons">
+  <% @pokemons.each do |pokemon| %>
+    <%= render pokemon %>
+    <p>
+      <%= link_to "Show this pokemon", pokemon %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pokemon", new_pokemon_path %>
